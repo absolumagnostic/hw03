@@ -2,20 +2,16 @@
 <html>
 <head>
     <meta charset="UTF-8">
-    <title>d3-start</title>
-    <script src="https://d3js.org/d3.v3.js"></script>
-    <style>
-        div{
-            font-size: 7px;
-        }
-    </style>
+    <title>Untitled Document</title>
+    <script src="https://d3js.org/d3.v3.min.js"></script>
 </head>
 <body>
-  <svg width="400" height="300">
-      
-  </svg>
+
+<svg width="400" height="250">
+    
+</svg>
    
-   <script>
+<script>
        d3.json("invoice-taipei.json", function(dataSet){
            var svg = d3.select("svg");
            var count = 0;
@@ -25,23 +21,63 @@
                         .append("rect")
                         .attr({
                         x: 190,
-                        y: 10+12*count,
+                        y: 10+17*count,
                         width: dataSet[i].amount/100000000,
-                        height: 10,
+                        height: 12,
                         fill: "red"
                       });
                       d3.select("svg")
                         .append("text")
                         .attr({
                         x: 0,
-                        y: 16+12*count,
-                        "font-size": 5
+                        y: 20+17*count,
+                        "font-size": 10
                       }).text(dataSet[i].industry);
                       count++;
                  }
                 
             }
        });
-   </script>
+</script>
+
+<div></div>
+
+<script>
+
+var arr = [85, 60, 99, 49, 77, 82];
+bind(arr);
+render();
+    
+    function bind(data){
+        var selection = d3.select("body")
+                        .selectAll("div")
+                        .data(data);
+        selection.enter().append("div");
+        selection.exit().remove();
+    }
+    
+    
+    function render(){       
+        d3.selectAll("div")
+        
+            .style({
+            color: function(d){
+                if(d<70){
+                    return "red";
+                }
+                else{
+                    return "black";
+                }
+            }
+            })
+        
+            .text(function(d,i){
+            return (i+1)+":"+d;
+            });
+    }
+
+</script>
+
+
 </body>
 </html>
